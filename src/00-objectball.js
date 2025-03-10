@@ -180,5 +180,5 @@ function playerStats(playerName) {
     }
     return "Player not found";
 }
-console.log(playerStats("Ben Gordon"));
+console.log(playerStats("Bismak Biyombo"));
 
