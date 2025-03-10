@@ -115,12 +115,12 @@ function gameObject() {
     };
 }
 console.log(gameObject());
+
 function homeTeamName() {
     return gameObject()["home"]["teamName"];
   }
-  
   console.log(homeTeamName());
-
+//Number of points scored by individual players
   function numPointsScored(playerName) {
     let game = gameObject();
     for (let team in game) {
@@ -131,7 +131,7 @@ function homeTeamName() {
     return "Player not found";
 }
 console.log(numPointsScored("Jason Terry"));
-
+// The shoe sie of players
 function shoeSize(playerName) {
     let game = gameObject();
     for (let team in game) {
@@ -142,7 +142,7 @@ function shoeSize(playerName) {
     return "Player not found";
 }
 console.log(shoeSize("Ben Gordon"));
-
+//Team colors
 function teamColors(teamName){
     let game = gameObject();
     for (let team in game){
@@ -153,7 +153,7 @@ function teamColors(teamName){
     return "Team not found";
 }
 console.log(teamColors("Charlotte Hornets"));
-
+//Returning team names
 function teamNames() {
     let game = gameObject();
     return [game.home.teamName, game.away.teamName];
@@ -181,4 +181,81 @@ function playerStats(playerName) {
     return "Player not found";
 }
 console.log(playerStats("Bismak Biyombo"));
+
+//Bonus questions
+//1. Player with the most points
+function mostPointsScored() {
+    let game = gameObject();
+    let maxPoints = 0;
+    let bestPlayer = "";
+
+    for (let team in game) {
+        for (let player in game[team].players) {
+            if (game[team].players[player].points > maxPoints) {
+                maxPoints = game[team].players[player].points;
+                bestPlayer = player;
+            }
+        }
+    }
+    return bestPlayer;
+}
+
+//2.Team with most points
+function winningTeam() {
+    let game = gameObject();
+    let teamPoints = {
+        home: 0,
+        away: 0
+    };
+
+    for (let team in game) {
+        for (let player in game[team].players) {
+            teamPoints[team] += game[team].players[player].points;
+        }
+    }
+
+    return teamPoints.home > teamPoints.away ? game.home.teamName : game.away.teamName;
+}
+
+//3.Player with the longest name
+function playerWithLongestName() {
+    let game = gameObject();
+    let longestName = "";
+
+    for (let team in game) {
+        for (let player in game[team].players) {
+            if (player.length > longestName.length) {
+                longestName = player;
+            }
+        }
+    }
+    return longestName;
+}
+
+//checking the player with the longest name
+
+function doesLongNameStealATon() {
+    let game = gameObject();
+    let longestName = "";
+    let mostSteals = 0;
+    let playerWithMostSteals = "";
+    for (let team in game) {
+        for (let player in game[team].players) {
+            if (player.length > longestName.length) {
+                longestName = player;
+            }
+        }
+    }
+//checking the player with most steals
+    for (let team in game) {
+        for (let player in game[team].players) {
+            if (game[team].players[player].steals > mostSteals) {
+                mostSteals = game[team].players[player].steals;
+                playerWithMostSteals = player;
+            }
+        }
+    }
+    //checking if the player with the most steals has the longest name
+    return longestName === playerWithMostSteals;
+}
 
